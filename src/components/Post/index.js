@@ -1,5 +1,6 @@
 import './styles.scss';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 function Post({ title, category, excerpt }) {
   return (
@@ -17,4 +18,4 @@ Post.propTypes = {
   excerpt: PropTypes.string.isRequired,
 };
 
-export default Post;
+export default React.memo(Post);
