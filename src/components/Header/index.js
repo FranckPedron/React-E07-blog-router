@@ -2,7 +2,12 @@ import './styles.scss';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-function Header({ categories }) {
+function Header({ categories, setIsZen, isZen }) {
+  const handleClick = () => {
+    setIsZen(!isZen);
+  };
+  const verb = isZen ? 'Désactiver' : 'Activer';
+
   return (
     <header className="menu">
       <nav>
@@ -17,7 +22,7 @@ function Header({ categories }) {
             </a>
           ))
         }
-        <button className="menu-btn" type="button">Activer le mode zen</button>
+        <button className="menu-btn" type="button" onClick={handleClick}>{verb} le mode zen</button>
       </nav>
     </header>
   );
@@ -28,6 +33,8 @@ Header.propTypes = {
     route: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
   })).isRequired,
+  setIsZen: PropTypes.func.isRequired,
+  isZen: PropTypes.bool.isRequired,
 };
 
 export default Header;

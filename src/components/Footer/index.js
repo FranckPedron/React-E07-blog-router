@@ -1,4 +1,5 @@
 import './styles.scss';
+import React from 'react';
 
 function Footer() {
   const now = new Date();
@@ -11,4 +12,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default React.memo(Footer);

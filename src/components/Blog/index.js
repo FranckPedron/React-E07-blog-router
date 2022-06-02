@@ -12,15 +12,14 @@ import './styles.scss';
 
 // == Composant
 function Blog() {
-  console.log(categoriesData);
-  console.log(postsData);
   const [posts, setPosts] = useState(postsData);
   const [categories, setCategories] = useState(categoriesData);
+  const [isZen, setIsZen] = useState(true);
 
   return (
     <div className="blog">
-      <Header categories={categories} />
-      <Posts posts={posts} />
+      <Header categories={categories} isZen={isZen} setIsZen={setIsZen} />
+      <Posts posts={posts} isZen={isZen} />
       <Footer />
     </div>
   );
