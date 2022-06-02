@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 // Composants
 import Header from 'src/components/Header';
 import Posts from 'src/components/Posts';
@@ -9,18 +11,20 @@ import postsData from 'src/data/posts';
 import './styles.scss';
 
 // == Composant
-const Blog = () => {
+function Blog() {
   console.log(categoriesData);
   console.log(postsData);
+  const [posts, setPosts] = useState(postsData);
+  const [categories, setCategories] = useState(categoriesData);
 
   return (
     <div className="blog">
-      <Header />
-      <Posts />
+      <Header categories={categories} />
+      <Posts posts={posts} />
       <Footer />
     </div>
   );
-};
+}
 
 // == Export
 export default Blog;
