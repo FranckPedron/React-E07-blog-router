@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 
 // Composants
 import Header from 'src/components/Header';
@@ -14,11 +15,12 @@ import './styles.scss';
 function Blog() {
   const [posts, setPosts] = useState(postsData);
   const [categories, setCategories] = useState(categoriesData);
-  const [isZen, setIsZen] = useState(true);
+  const [isZen, setIsZen] = useState(false);
 
   return (
     <div className="blog">
       <Header categories={categories} isZen={isZen} setIsZen={setIsZen} />
+
       <Posts posts={posts} isZen={isZen} />
       <Footer />
     </div>

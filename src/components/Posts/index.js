@@ -26,6 +26,7 @@ Posts.propTypes = {
     excerpt: PropTypes.string.isRequired,
   })).isRequired,
   isZen: PropTypes.bool.isRequired,
+  category: PropTypes.string.isRequired,
 };
 
 export default React.memo(Posts);

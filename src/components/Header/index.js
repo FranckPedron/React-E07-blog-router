@@ -1,6 +1,6 @@
 import './styles.scss';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { NavLink } from 'react-router-dom';
 
 function Header({ categories, setIsZen, isZen }) {
   const handleClick = () => {
@@ -13,13 +13,13 @@ function Header({ categories, setIsZen, isZen }) {
       <nav>
         {
           categories.map((category) => (
-            <a
+            <NavLink
               key={category.label}
-              className={classNames('menu-link', { 'menu-link--selected': category.route === '/' })}
-              href={category.route}
+              className={({ isActive }) => (isActive ? 'menu-link menu-link--selected' : 'menu-link')}
+              to={category.route}
             >
               {category.label}
-            </a>
+            </NavLink>
           ))
         }
         <button className="menu-btn" type="button" onClick={handleClick}>{verb} le mode zen</button>
