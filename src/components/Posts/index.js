@@ -6,17 +6,14 @@ import Post from '../Post';
 import './styles.scss';
 
 function Posts({ posts, isZen, label }) {
+  const filteredPosts = posts.filter((post) => post.category === label);
+
   return (
     <main className={classNames('posts', { 'posts--zen': isZen })}>
       <h1 className="posts-title">Dev Of Thrones</h1>
       <div className="posts-list">
         {
-          posts.map((post) =>
-            /* {post.category}=
-            {
-              label
-            }; */
-            <Post key={post.id} {...post} />)
+          filteredPosts.map((post) => <Post key={post.id} {...post} />)
         }
       </div>
     </main>

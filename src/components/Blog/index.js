@@ -6,7 +6,6 @@ import axios from 'axios';
 import Header from 'src/components/Header';
 import Posts from 'src/components/Posts';
 import Footer from 'src/components/Footer';
-import categoriesData from 'src/data/categories';
 import NotFound from '../NotFound';
 import Spinner from '../Spinner';
 
@@ -16,7 +15,7 @@ import './styles.scss';
 // == Composant
 function Blog() {
   const [posts, setPosts] = useState([]);
-  const [categories, setCategories] = useState(categoriesData);
+  const [categories, setCategories] = useState([]);
   const [isZen, setIsZen] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -31,7 +30,19 @@ function Blog() {
     setLoading(false);
   }
 
+  async function fetchCategories() {
+    try {
+      const result = await axios.get('https://oclock-open-apis.vercel.app/api/blog/categories');
+      setCategories(result.data);
+    }
+    catch (err) {
+      console.log(err);
+    }
+    setLoading(false);
+  }
+
   useEffect(fetchPosts, []);
+  useEffect(fetchCategories, []);
 
   return (
     <div className="blog">
@@ -39,7 +50,15 @@ function Blog() {
       {loading && <Spinner />}
       {!loading && (
       <Routes>
-        <Route path="/" element={<Posts posts={posts} isZen={isZen} label="React" />} />
+        {
+          categories.map((category) => (
+            <Route
+              key={category.label}
+              path={category.route}
+              element={<Posts posts={posts} isZen={isZen} label={category.label} />}
+            />
+          ))
+        }
         <Route path="*" element={<NotFound />} />
       </Routes>
       )}
