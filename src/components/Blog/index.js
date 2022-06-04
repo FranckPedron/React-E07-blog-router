@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import axios from 'axios';
+import useFetchData from '../../hooks/useFetchData';
 
 // Composants
 import Header from 'src/components/Header';
@@ -11,27 +11,6 @@ import Spinner from '../Spinner';
 
 // data, styles et utilitaires
 import './styles.scss';
-
-function useFetchData(url) {
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState(null);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(url);
-      setData(response.data);
-    }
-    catch (err) {
-      console.log(err);
-    }
-    finally {
-      setLoading(false);
-    }
-  };
-  useEffect(fetchData, []);
-
-  return [loading, data];
-}
 
 // == Composant
 function Blog() {
